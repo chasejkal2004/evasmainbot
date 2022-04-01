@@ -1,0 +1,32 @@
+{
+  "giveaways": [
+    {
+      "host": 244956871797112832,
+      "guild": "Eva Cudmore",
+      "channel": 958911245673701407,
+      "end-of-giveaway": 1648858971,
+      "reward": "dis dick",
+      "winner_count": 2,
+      "messageid": "959246484304429106",
+      "date-started": "Fri Apr  1 00:22:51 2022",
+      "time-remaining": "1 Day",
+      "time-remaining-int": 86400,
+      "entries": []
+    },
+    {
+      "host": 244956871797112832,
+      "guild": "Eva Cudmore",
+      "channel": 958911245673701407,
+      "end-of-giveaway": 1648815519,
+      "reward": "hello",
+      "winner_count": 1,
+      "messageid": "959424131034648596",
+      "date-started": "Fri Apr  1 12:08:38 2022",
+      "time-remaining": "10 Minutes",
+      "time-remaining-int": 600,
+      "entries": [
+        "958869114812772382"
+      ]
+    }
+  ]
+}

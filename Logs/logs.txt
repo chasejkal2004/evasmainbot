@@ -1,0 +1,32 @@
+[2022-04-01 09:38:16,552]:[DEBUG]: Started Logging
+[2022-04-01 09:38:16,552]:[INFO]: Connecting to Discord.
+[2022-04-01 09:38:16,553]:[DEBUG]: on_ready has successfully been registered as an event
+[2022-04-01 09:38:16,554]:[DEBUG]: on_message has successfully been registered as an event
+[2022-04-01 09:38:16,554]:[INFO]: ------------- Loading -------------
+[2022-04-01 09:38:16,554]:[INFO]: Loading: xppermessage.py
+[2022-04-01 09:38:16,571]:[INFO]: Loaded xppermessage.py
+[2022-04-01 09:38:16,572]:[INFO]: Loading: leaderboard.py
+[2022-04-01 09:38:16,594]:[INFO]: Loaded leaderboard.py
+[2022-04-01 09:38:16,596]:[INFO]: Loading: doublexp.py
+[2022-04-01 09:38:16,618]:[INFO]: Loaded doublexp.py
+[2022-04-01 09:38:16,618]:[INFO]: Loading: snipe.py
+[2022-04-01 09:38:16,619]:[INFO]: Loaded snipe.py
+[2022-04-01 09:38:16,619]:[INFO]: Loading: giveaway.py
+[2022-04-01 09:38:16,658]:[INFO]: Loaded giveaway.py
+[2022-04-01 09:38:16,659]:[INFO]: Loading: talkchannels.py
+[2022-04-01 09:38:16,675]:[INFO]: Loaded talkchannels.py
+[2022-04-01 09:38:16,676]:[INFO]: Loading: rank.py
+[2022-04-01 09:38:16,694]:[INFO]: Loaded rank.py
+[2022-04-01 09:38:16,694]:[INFO]: Loading: role.py
+[2022-04-01 09:38:16,715]:[INFO]: Loaded role.py
+[2022-04-01 09:38:16,715]:[INFO]: Loading: test.py
+[2022-04-01 09:38:16,738]:[INFO]: Loaded test.py
+[2022-04-01 09:38:16,738]:[INFO]: Loading: levelchannel.py
+[2022-04-01 09:38:16,758]:[INFO]: Loaded levelchannel.py
+[2022-04-01 09:38:16,758]:[INFO]: Loading: Holiday System.py Addon
+[2022-04-01 09:38:16,783]:[INFO]: Loaded Holiday System.py Addon
+[2022-04-01 09:38:16,783]:[INFO]: Loading: Profile+.py Addon
+[2022-04-01 09:38:16,807]:[INFO]: Loaded Profile+.py Addon
+[2022-04-01 09:38:16,807]:[INFO]: Loading: Events.py Addon
+[2022-04-01 09:38:16,835]:[INFO]: Loaded Events.py Addon
+[2022-04-01 09:38:16,835]:[INFO]: Loading: tz.py Addon
