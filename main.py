@@ -1,13 +1,10 @@
-# Imports
-from os import listdir
-
-from discord.ext import commands
-from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError, MissingRole, \
-    NoPrivateMessage
 import discord
+from discord.ext import commands
+import os
+from os import listdir
+from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError, MissingRole, NoPrivateMessage
 from ruamel.yaml import YAML
 import logging
-import os
 import requests
 from dotenv import load_dotenv
 from discord import Webhook, RequestsWebhookAdapter
@@ -42,7 +39,11 @@ TIME_INTERVAL = os.environ.get('TIME_INTERVAL')
 WEBHOOK_URL = os.environ.get('WEBHOOK_URL')
 
 web = Webhook.from_url(WEBHOOK_URL, adapter=RequestsWebhookAdapter())
-
+@client.command()
+async def reload(ctx,cog):
+    # Reloads the file, thus updating the Cog class.
+    client.reload_extension(f"Addons.{cog}")
+    await ctx.send(f"Reloaded {cog} cog")
 def get_user_fullname(html):
     return html.json()["graphql"]["user"]["full_name"]
 
@@ -238,8 +239,7 @@ logging.info(f"Loaded Level System")
 
 logging.info("------------- Finished Loading -------------")
 
-# Uses the bot token to login, so don't remove this.
-token = os.getenv("DISCORD_TOKEN")
-client.run(token)
+
+client.run("OTU2NjExODkxMjU2NTE2NjQ5.YjywPw.DgHwIWdZ_-9JztKrfRs5_wE0MXk")
 
 # End Of Main

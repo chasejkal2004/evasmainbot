@@ -149,7 +149,7 @@ class Antispam(commands.Cog):
             await ctx.send(embed=embed)
             return
         if role is not None:
-            levelling.update_one({'server': ctx.guild.id}, {'$set': {'ignoredRole': role.name}})
+            ,
             embed = discord.Embed(title="⚠️ // Ignored Role", description=f"Ignored role set to `{role.name}`!", color=0xFF0000)
             await ctx.send(embed=embed)
             return

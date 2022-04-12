@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "repl_python3_evasmainbot"
+version = "0.1.0"
+description = ""
+authors = ["chasejkal04 <<>>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pymongo = "^4.0.2"
+python-dotenv = "^0.20.0"
+pytz = "^2022.1"
+dateparser = "^1.1.1"
+discord = "^1.7.3"
+psutil = "^5.9.0"
+"ruamel.yaml" = "^0.17.21"
+"vacefron.py" = "^1.6.3"
+instagramy = "^4.5"
+srv = "^1.1.0"
+lastfmpy = "^1.1"
+validators = "^0.18.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
