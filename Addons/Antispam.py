@@ -54,7 +54,7 @@ class Antispam(commands.Cog):
             levelling.update_one({'id': message.author.id, 'guildid': message.guild.id}, {'$inc': {'message_count': 1}})
         else:
             levelling.update_one({'id': message.author.id, 'guildid': message.guild.id}, {'$set': {'message_count': 1}})
-            print(f'[Anti-Spam] User {message.mention} was missing MESSAGE_COUNT - Automatically adding it!')
+            #print(f'[Anti-Spam] User {message.mention} was missing MESSAGE_COUNT - Automatically adding it!')
 
         # check if message count is higher than warningMessages
         check = levelling.find_one(
@@ -149,7 +149,7 @@ class Antispam(commands.Cog):
             await ctx.send(embed=embed)
             return
         if role is not None:
-            ,
+            
             embed = discord.Embed(title="⚠️ // Ignored Role", description=f"Ignored role set to `{role.name}`!", color=0xFF0000)
             await ctx.send(embed=embed)
             return

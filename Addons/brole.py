@@ -23,18 +23,11 @@ class rolecmd(commands.Cog, name="Roles"):
         await ctx.send("Ping 1")
      @brole.command()
      async def create(self, ctx, role: str):
-        member = ctx.author
-        data = levelling.find_one({"guildid": ctx.guild.id, "id": member.id})
-        rolename = data["role"]
-        if rolename is None:
-          return await ctx.send("You do not have a booster role. To create one do !brole create")
           levelling.update_one({"guildid": ctx.guild.id, "id": ctx.author.id}, {"$set": {"role": f"{role}"}})
           await ctx.send(f"Assigned {role} to be your booster role")
           guild = ctx.guild
           role2 = await guild.create_role(name=role)
-          await ctx.author.add_roles(role2)
-        else:
-          return await ctx.send("You already have a role. To rename your role do !brole rename (name)") 
+          await ctx.author.add_roles(role2) 
      @brole.command()
      async def color(self, ctx, color):
         await ctx.send("did it work?")
@@ -47,6 +40,12 @@ class rolecmd(commands.Cog, name="Roles"):
         color2 = color.replace("#","")
         main = int(color2, 16)
         await role.edit(colour=main)
+
+     @brole.command()
+     async def role(self, ctx, role:discord.Role):
+        print(role.position)
+        levelling.update_one({"server": ctx.guild.id}, {"$set": {"brolenum": f"{role.position}"}})
+
      @brole.command()
      async def rename(self, ctx, rname):
         member = ctx.author

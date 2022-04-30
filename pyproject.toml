@@ -18,6 +18,12 @@ instagramy = "^4.5"
 srv = "^1.1.0"
 lastfmpy = "^1.1"
 validators = "^0.18.2"
+lastfmcollagegenerator = "^0.1.2"
+utils = "^1.0.1"
+nanoid = "^2.0.0"
+paramiko = "^2.10.4"
+wget = "^3.2"
+dload = "^0.6"
 
 [tool.poetry.dev-dependencies]
 

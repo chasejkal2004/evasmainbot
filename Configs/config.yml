@@ -8,7 +8,7 @@
 Prefix: "!"
 
 # Set what the bot is currently playing
-bot_status_text: "Watching over Evas Discord."
+bot_status_text: "In Production."
 
 # IDLE, DND, ONLINE, OFFLINE
 bot_activity: online

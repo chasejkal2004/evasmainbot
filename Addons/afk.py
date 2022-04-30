@@ -37,16 +37,19 @@ class afk(commands.Cog, name="AFK"):
   async def on_message(self,message):
     if message.content.startswith('!afk'):
         return
+    if message.author.bot: return
     stats = levelling.find_one({"guildid": message.guild.id, "id": message.author.id})
-    ifafk = stats["AFK"]
-    if ifafk == "True":
+    if stats["AFK"] == "False":
+        return
+    if stats["AFK"] == "":
+        return
+    elif stats["AFK"] == "True":
         levelling.update_one({"guildid": message.guild.id, "id": message.author.id}, {"$set": {"AFK": "False"}})
         await message.channel.send("Dumbass returned from being afk") 
         return
     if message.mentions:
         memberm = levelling.find_one({"guildid": message.guild.id, "id": message.mentions[0].id})
-        ifafk = memberm["AFK"]
-        if ifafk == "True":
+        if memberm["AFK"] == "True":
           await message.channel.send("That person is currently afk")
 def setup(client):
     client.add_cog(afk(client))

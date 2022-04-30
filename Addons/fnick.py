@@ -31,11 +31,10 @@ class fnick(commands.Cog, name="Roles"):
      @commands.Cog.listener()
      async def on_member_update(self,before,after):
        stats = levelling.find_one({"guildid": after.guild.id, "id": after.id})
-       nick2 = stats["nick"]
-       if nick2 is None:
-         return
+       if stats["nick"] == "":
+          return
        else:
-         await after.edit(nick=nick2)
+         await after.edit(nick=stats["nick"])
        
 def setup(client):
     client.add_cog(fnick(client))

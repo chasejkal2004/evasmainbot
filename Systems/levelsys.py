@@ -174,12 +174,12 @@ class levelsys(commands.Cog):
                     user = f"<@{member.id}>"
                     levelling.update_one({"guildid": guild.id, "id": member.id}, {
                         "$set": {"tag": user, "xp": serverstats['xp_per_message'], "rank": 1, "background": " ",
-                                 "circle": False, "xp_colour": "#ffffff", "name": f"{member}", "warnings": 0}})
+                                 "circle": False, "AFK": "False","nick": "", "xp_colour": "#ffffff", "name": f"{member}", "warnings": 0}})
                     continue
                 else:
                     newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>",
                                "xp": serverstats['xp_per_message'],
-                               "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0,
+                               "rank": 1, "background": " ", "circle": False,  "AFK": "False","nick": "","xp_colour": "#ffffff", "warnings": 0,
                                "name": str(member)}
                     levelling.insert_one(newuser)
                 print(f"User: {member.id} has been added to the database!")
