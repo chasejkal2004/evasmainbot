@@ -28,22 +28,12 @@ class Stats(commands.Cog):
             embed.add_field(name="Memory:", value=f"`{psutil.virtual_memory()[2]}%`")
             embed.add_field(name="Servers:", value=f"`{len(list(self.client.guilds))}`")
             embed.add_field(name="Members:", value=f"`{len(list(self.client.users))}`")
-            embed.add_field(name="Messages:", value=f"`{check_field['total_messages'] - 1}`")
             await ctx.send(embed=embed)
         else:
             levelling.update_one({"bot_name": f"{self.client.user.name}"}, {"$set": {"total_messages": 1}})
 
 
-    @commands.Cog.listener()
-    async def on_message(self, ctx):
-        if not ctx.author.bot:
-            bot_stats = levelling.find_one({"bot_name": f"{self.client.user.name}"})
-            check_field = levelling.find({"bot_name": f"{self.client.user.name}", "total_messages": {"$exists": True}})
-            if check_field:
-                levelling.update_one({"bot_name": f"{self.client.user.name}"}, {"$set": {"total_messages": bot_stats['total_messages'] + 1}})
-            else:
-                messages = 1
-                levelling.update_one({"bot_name": f"{self.client.user.name}"}, {"$set": {"total_messages": messages}})
+
 
 
 

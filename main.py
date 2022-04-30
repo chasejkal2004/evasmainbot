@@ -1,13 +1,12 @@
-# Imports
-from os import listdir
-
+orialis
+/
+discord.pyimport discord
 from discord.ext import commands
-from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError, MissingRole, \
-    NoPrivateMessage
-import discord
+import os
+from os import listdir
+from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError, MissingRole, NoPrivateMessage
 from ruamel.yaml import YAML
 import logging
-import os
 import requests
 from dotenv import load_dotenv
 from discord import Webhook, RequestsWebhookAdapter
@@ -16,6 +15,8 @@ from instagramy import InstagramUser
 import asyncio
 load_dotenv()
 
+
+#https://codingstatus.com/fetch-data-from-mongodb-using-mongoose/
 # Opens the config and reads it, no need for changes unless you'd like to change the library (no need to do so unless having issues with ruamel)
 yaml = YAML()
 with open("Configs/config.yml", "r", encoding="utf-8") as file:
@@ -23,7 +24,7 @@ with open("Configs/config.yml", "r", encoding="utf-8") as file:
 
 # Command Prefix + Removes the default discord.py help command
 client = commands.Bot(command_prefix=commands.when_mentioned_or(config['Prefix']), intents=discord.Intents.all(), case_insensitive=True)
-client.remove_command('help')
+
 
 # sends discord logging files which could potentially be useful for catching errors.
 os.remove("Logs/logs.txt")
@@ -32,97 +33,6 @@ logging.basicConfig(filename='Logs/logs.txt', level=logging.DEBUG, format=FORMAT
 logging.debug('Started Logging')
 logging.info('Connecting to Discord.')
 
-os.environ['IG_USERNAME'] = 'eva.cudmore'
-os.environ['TIME_INTERVAL'] = '5'
-os.environ['WEBHOOK_URL'] = 'https://discord.com/api/webhooks/958993287606304788/iO59oLqIzSMtqnqm49RbGM1grOR3gr6VW7KjRtGKzhsCKKFss774ChDDG-ovgS8b04Xv'
-
-IG_USERNAME = os.getenv('IG_USERNAME')
-INSTAGRAM_USERNAME = os.environ.get('IG_USERNAME')
-TIME_INTERVAL = os.environ.get('TIME_INTERVAL')
-WEBHOOK_URL = os.environ.get('WEBHOOK_URL')
-
-web = Webhook.from_url(WEBHOOK_URL, adapter=RequestsWebhookAdapter())
-
-def get_user_fullname(html):
-    return html.json()["graphql"]["user"]["full_name"]
-
-
-def get_total_photos(html):
-    return int(html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["count"])
-
-
-def get_last_publication_url(html):
-    return html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["shortcode"]
-
-
-def get_last_photo_url(html):
-    return html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["display_url"]
-
-
-def get_last_thumb_url(html):
-    return html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["thumbnail_src"]
-
-
-def get_description_photo(html):
-    return html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["edge_media_to_caption"]["edges"][0]["node"]["text"]
-
-
-async def webhook(webhook_url, html):
-    data = {}
-    data["embeds"] = []
-    embed = {}
-    embed["color"] = 15467852
-    embed["title"] = "@"+INSTAGRAM_USERNAME+"Has posted on Instagram!"
-    embed["url"] = "https://www.instagram.com/p/" + \
-        get_last_publication_url(html)+"/"
-    embed["description"] = get_description_photo(html)
-    embed["image"] = {"url":get_last_thumb_url(html)} 
-    data["embeds"].append(embed)
-    guild = await client.fetch_guild(958418306753257473)
-    role = discord.utils.get(guild.roles, name='Instagram')
-    result = requests.post(webhook_url, data=json.dumps(
-        data), headers={"Content-Type": "application/json"})
-    web.send(role.mention)
-    try:
-        result.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        print(err)
-    else:
-        print("Image successfully posted in Discord, code {}.".format(
-            result.status_code))
-
-
-def get_instagram_html(INSTAGRAM_USERNAME):
-    headers = {
-        "Host": "www.instagram.com",
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11"
-    }
-    html = requests.get("https://www.instagram.com/" +
-                        INSTAGRAM_USERNAME + "/feed/?__a=1", headers=headers)
-    return html
-
-#os.environ['LAST_IMAGE_ID'] = get_last_publication_url(get_instagram_html(INSTAGRAM_USERNAME))
-
-async def main():
-    try:
-        html = get_instagram_html(INSTAGRAM_USERNAME)
-        if(os.environ.get("LAST_IMAGE_ID") == get_last_publication_url(html)):
-            pass
-        else:
-            os.environ["LAST_IMAGE_ID"] = get_last_publication_url(html)
-            await webhook(os.environ.get("WEBHOOK_URL"),
-                    get_instagram_html(INSTAGRAM_USERNAME))
-    except Exception as e:
-        print(e)
-
-async def function():
-    if __name__ == "__main__":
-        if os.environ.get('IG_USERNAME') != None and os.environ.get('WEBHOOK_URL') != None:
-            while True:
-                await main()
-                await asyncio.sleep(float(os.environ.get('TIME_INTERVAL') or 600))
-        else:
-            print('Please configure environment variables properly!')
 
 @client.event  # On Bot Startup, Will send some details about the bot and sets it's activity and status. Feel free to remove the print messages, but keep everything else.
 async def on_ready():
@@ -137,7 +47,6 @@ async def on_ready():
     print('------')
     print(f"Status: {config_status}\nActivity: {config_activity}")
     print('------')
-    client.loop.create_task(function())
     await client.change_presence(status=config_activity, activity=activity)
     for guild in client.guilds:
         serverstats = levelling.find({"server": guild.id, "role": {"$exists": False}})
@@ -154,6 +63,11 @@ async def on_ready():
         bot_data = {"bot_name": f"{client.user.name}", "event_state": False}
         levelling.insert_one(bot_data)
 
+@client.command()
+async def areload(ctx,addon):
+    # Reloads the file, thus updating the Cog class.
+    client.reload_extension(f"Addons.{addon}")
+    await ctx.send("Success")
 @client.command()
 async def addons(ctx):
     # ✅ // ❌
@@ -238,8 +152,7 @@ logging.info(f"Loaded Level System")
 
 logging.info("------------- Finished Loading -------------")
 
-# Uses the bot token to login, so don't remove this.
-token = os.getenv("DISCORD_TOKEN")
-client.run(token)
+
+client.run("OTU2NjExODkxMjU2NTE2NjQ5.YjywPw.WhS74u_DiiDZBiHReb4-uer4U7Q")
 
 # End Of Main

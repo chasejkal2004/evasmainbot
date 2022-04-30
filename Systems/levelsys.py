@@ -1,6 +1,6 @@
 # Imports
 import asyncio
-
+import sys
 import discord
 from discord.ext import commands
 from pymongo import MongoClient
@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 # Loads the .env file and gets the required information
 load_dotenv()
-MONGODB_URI = os.environ['MONGODB_URI']
+MONGODB_URI = os.getenv("MONGODB_URI")
 COLLECTION = os.getenv("COLLECTION")
 DB_NAME = os.getenv("DATABASE_NAME")
 
@@ -174,12 +174,12 @@ class levelsys(commands.Cog):
                     user = f"<@{member.id}>"
                     levelling.update_one({"guildid": guild.id, "id": member.id}, {
                         "$set": {"tag": user, "xp": serverstats['xp_per_message'], "rank": 1, "background": " ",
-                                 "circle": False, "xp_colour": "#ffffff", "name": f"{member}", "warnings": 0}})
+                                 "circle": False, "AFK": "False","nick": "", "xp_colour": "#ffffff", "name": f"{member}", "warnings": 0}})
                     continue
                 else:
                     newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>",
                                "xp": serverstats['xp_per_message'],
-                               "rank": 1, "background": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0,
+                               "rank": 1, "background": " ", "circle": False,  "AFK": "False","nick": "","xp_colour": "#ffffff", "warnings": 0,
                                "name": str(member)}
                     levelling.insert_one(newuser)
                 print(f"User: {member.id} has been added to the database!")
@@ -206,12 +206,12 @@ class levelsys(commands.Cog):
                 user = f"<@{member.id}>"
                 levelling.update_one({"guildid": member.guild.id, "id": member.id}, {
                     "$set": {"tag": user, "xp": serverstats['xp_per_message'], "rank": 1, "background": " ",
-                             "timezone": " ", "circle": False, "xp_colour": "#ffffff", "name": f"{member}", "warnings": 0}})
+                             "timezone": " ","role": " ","nick": " ","AFK": " ", "circle": False,"warns": [], "xp_colour": "#ffffff", "name": f"{member}", "warnings": 0}})
             else:
                 getGuild = levelling.find_one({"server": member.guild.id})
                 newuser = {"guildid": member.guild.id, "id": member.id, "tag": f"<@{member.id}>",
                            "xp": getGuild["xp_per_message"],
-                           "rank": 1, "background": " ", "timezone": " ", "circle": False, "xp_colour": "#ffffff", "warnings": 0,
+                           "rank": 1, "background": " ", "timezone": " ","AFK": " ","nick": " ","warns": [], "circle": False, "xp_colour": "#ffffff", "warnings": 0,
                            "name": str(member)}
                 levelling.insert_one(newuser)
                 print(f"User: {member.id} has been added to the database!")
